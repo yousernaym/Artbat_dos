@@ -80,12 +80,10 @@ DIM SHARED curnamnmax
 DIM SHARED gdelay AS SINGLE
 DIM SHARED contdelay AS SINGLE
 maxturns = 10
-contdelay = 1
 
-OPEN "delay" FOR INPUT AS #1
-INPUT #1, gdelay
-INPUT #1, contdelay
-CLOSE #1
+'Adapt frame delay for Dosbox with 20000 cycles per ms
+gdelay = 0.1 
+contdelay = 1
 
 CONST gspeed = .03
 CONST maxgspeed = .03
@@ -650,7 +648,7 @@ FOR i! = 0 TO 2000 * contdelay * gdelay
 'IF loopinp < 128 THEN loop$ = INKEY$: ingamekeys loop$
 loop$ = INKEY$
 IF loop$ <> "" THEN a$ = RIGHT$(loop$, 1): k = ASC(a$)
-IF a$ = "d" OR a$ = "c" OR a$ = CHR$(27) OR a$ = " " OR a$ = CHR$(13) THEN
+IF a$ = CHR$(27) OR a$ = " " OR a$ = CHR$(13) THEN
   GOTO breakcontdelay
 ELSEIF LEN(loop$) = 2 THEN
   length = 2
@@ -985,25 +983,9 @@ END SUB
 SUB ingamekeys (a$)
     IF a$ = CHR$(27) THEN
        quit
-    ELSEIF a$ = "d" OR a$ = "c" THEN
-delay:
-       IF a$ = "d" THEN text$ = "Global delay: " ELSE text$ = "Control delay: "
-       LOCATE 4, 2: PRINT text$;
-       INPUT "", d$
-       LOCATE 4, 2: PRINT "                                              "
-       IF d$ <> "" THEN
-         IF LEN(d$) > 10 THEN LOCATE 4, 25: PRINT "Overflow!": GOTO delay
-         delay! = VAL(d$) / 100
-         IF delay! < 0 THEN delay! = 0
-         IF a$ = "d" THEN gdelay = delay! ELSE contdelay = delay!
-         ff = FREEFILE
-         OPEN "delay" FOR OUTPUT AS #ff
-         PRINT #ff, gdelay
-         PRINT #ff, contdelay
-         CLOSE #ff
-       END IF
     END IF
 END SUB
+
 
 FUNCTION intinput (min, max, default)
 DO
