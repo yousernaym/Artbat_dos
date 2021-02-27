@@ -82,8 +82,15 @@ DIM SHARED contdelay AS SINGLE
 maxturns = 10
 
 'Adapt frame delay for Dosbox with 20000 cycles per ms
-gdelay = 0.1 
-contdelay = 1
+compile = 1
+compileScaleGdelay = 1
+compileScaleContDelay = 1
+IF compile = 1 THEN
+    compileScaleGdelay = 2.5
+    compileScaleContDelay = .8
+END IF
+gdelay = .05 * compileScaleGdelay
+contdelay = .9 * compileScaleContDelay
 
 CONST gspeed = .03
 CONST maxgspeed = .03
@@ -97,7 +104,7 @@ CONST lcol = 3
 CONST bcol = 0
 CONST framecol = 9
 CONST powspeed = 1
-CONST aspeed = 4
+CONST aspeed = 6
 CONST powmax = 100
 CONST powfactor = 1
 CONST powdisplayfactor = 10
@@ -658,10 +665,10 @@ NEXT
 breakcontdelay:
 
 scale2 = 6
-IF k2 = 75 THEN tank.a = tank.a + aspeed / scale2
-IF k2 = 77 THEN tank.a = tank.a - aspeed / scale2
-IF k2 = 72 THEN tank.pow = tank.pow + powspeed / scale2
-IF k2 = 76 THEN tank.pow = tank.pow - powspeed / scale2
+IF k2 = 30 THEN tank.a = tank.a + aspeed / scale2
+IF k2 = 32 THEN tank.a = tank.a - aspeed / scale2
+IF k2 = 17 THEN tank.pow = tank.pow + powspeed / scale2
+IF k2 = 31 THEN tank.pow = tank.pow - powspeed / scale2
 END IF
 
 IF k = 75 THEN tank.a = tank.a + 1
@@ -985,7 +992,6 @@ SUB ingamekeys (a$)
        quit
     END IF
 END SUB
-
 
 FUNCTION intinput (min, max, default)
 DO
