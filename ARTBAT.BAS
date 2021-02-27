@@ -1073,11 +1073,8 @@ OPEN "temprec" FOR BINARY AS #1
 
 curnamnmax = 0
 CLS
-PRINT "                            Artillery battle 1.1"
-PRINT "                         --------------------------"
-PRINT
-PRINT "                            by Michael H„llstr”m"
-PRINT
+PRINT "                              Artillery Battle"
+PRINT "                           ----------------------"
 PRINT
 'redo:
 'LOCATE 7, 1
