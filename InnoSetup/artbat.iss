@@ -34,6 +34,9 @@ Source: "..\dosbox\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "..\readme.txt"; DestDir: "{app}\artbat"; Flags: ignoreversion isreadme
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
+[Dirs]
+Name: {app}\artbat; Permissions: users-modify
+
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\Readme"; Filename: "{app}\artbat\readme.txt"
@@ -42,3 +45,5 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
+[UninstallDelete]
+Type: files; Name: "{app}\artbat\temprec"
