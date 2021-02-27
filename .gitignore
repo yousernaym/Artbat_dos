@@ -37,3 +37,4 @@ delay
 *.zip
 dosbox/*
 !dosbox.conf
+screenshots/
