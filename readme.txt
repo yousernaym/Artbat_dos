@@ -7,13 +7,6 @@ Arrow keys(discrete steps) or numpad(continuous, with numlock turned on):
 page up/page down - Adjust power by larger steps
 enter/space - Fire
 
-OTHER IN-GAME KEYS
----------------------
-d - Frame delay
-    100 for default and higher/lower values for the game to go slower/faster).
-
-c - Same as d but only affects the (continuous) controls.
-
 OTHER INSTRUCTIONS
 -------------------
 A direct hit will destroy the target.
